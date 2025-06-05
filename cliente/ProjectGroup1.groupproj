@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{24168DA0-2535-42E5-A300-14892FFBE926}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="DelphiToHero.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Servidor\ServidorHorse.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DelphiToHero">
+        <MSBuild Projects="DelphiToHero.dproj"/>
+    </Target>
+    <Target Name="DelphiToHero:Clean">
+        <MSBuild Projects="DelphiToHero.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DelphiToHero:Make">
+        <MSBuild Projects="DelphiToHero.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ServidorHorse">
+        <MSBuild Projects="..\Servidor\ServidorHorse.dproj"/>
+    </Target>
+    <Target Name="ServidorHorse:Clean">
+        <MSBuild Projects="..\Servidor\ServidorHorse.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ServidorHorse:Make">
+        <MSBuild Projects="..\Servidor\ServidorHorse.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DelphiToHero;ServidorHorse"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DelphiToHero:Clean;ServidorHorse:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DelphiToHero:Make;ServidorHorse:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
